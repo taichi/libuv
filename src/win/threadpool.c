@@ -43,9 +43,9 @@ static DWORD WINAPI uv_work_thread_proc(void* parameter) {
 
   assert(req != NULL);
   assert(req->type == UV_WORK);
-  assert(req->work_cb);
 
-  req->work_cb(req);
+  if(req->work_cb)
+    req->work_cb(req);
 
   POST_COMPLETION_FOR_REQ(loop, req);
 
